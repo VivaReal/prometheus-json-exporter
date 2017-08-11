@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: metrics-similar-listings
+  namespace: monitoring
+  labels:
+    app: metrics
+    process: similarlistings
+    product: monitoring
+  annotations:
+    kubernetes.io/ingress.class: "private"
+spec:
+  rules:
+  - host: metrics-similar-listings.private.prod.vivareal.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: metrics-similar-listings
+          servicePort: 7979

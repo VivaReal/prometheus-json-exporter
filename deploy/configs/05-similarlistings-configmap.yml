@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  config.yml: |
+    - name: CountListings
+      path: $.listingsCount.listings
+      labels:
+        environment: prod
+
+    - name: GlobalStatus
+      path: $.status
+
+    - name: ListingsStatus
+      path: $.listingsCount.status
+
+    - name: redisStatus
+      path: $.redis.status
+
+    - name: DiskSpaceStatus
+      path: $.diskSpace.status
+
+    - name: DiskSpaceTotal
+      path: $.diskSpace.total
+
+    - name: DiskSpaceFree
+      path: $.diskSpace.free
+metadata:
+  name: config-metrics-similar-listings
+  namespace: monitoring
