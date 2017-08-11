@@ -5,12 +5,9 @@ metadata:
     prometheus.io/path: /metrics
     prometheus.io/port: "7979"
     prometheus.io/scrape: "true"
-  name: metrics-similar-listings
-  namespace: monitoring
+  name: metrics
   labels:
     app: metrics
-    process: similarlistings
-    product: monitoring
 spec:
   ports:
   - port: 7979
@@ -18,6 +15,4 @@ spec:
     targetPort: 7979
   selector:
     app: metrics
-    process: similarlistings
-    product: monitoring
   type: ClusterIP

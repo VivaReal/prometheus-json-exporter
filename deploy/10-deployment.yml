@@ -1,12 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: metrics-similar-listings
-  namespace: monitoring
+  name: metrics
   labels:
     app: metrics
-    process: similarlistings
-    product: monitoring
 spec:
   replicas: 1
   strategy:
@@ -15,25 +12,23 @@ spec:
     metadata:
       labels:
         app: metrics
-        process: similarlistings
-        product: monitoring
     spec:
       containers:
       - name: metrics
         imagePullPolicy: Always
-        image: vivareal/prometheus-json-exporter:latest
+        image: prometheus-json-exporter:latest
         env:
           - name: ENDPOINT_JSON
             valueFrom:
               secretKeyRef:
-                name: metrics-similar-listings
+                name: metrics
                 key: ENDPOINT_JSON
         volumeMounts:
-        - name: config-metrics
+        - name: volume-config
           mountPath: /app/config
         ports:
         - containerPort: 7979
       volumes:
-      - name: config-metrics
+      - name: volume-config
         configMap:
-          name: config-metrics-similar-listings
+          name: config-metrics
